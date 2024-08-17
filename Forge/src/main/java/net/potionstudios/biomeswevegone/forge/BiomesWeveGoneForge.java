@@ -16,7 +16,6 @@ import net.potionstudios.biomeswevegone.forge.client.BiomesWeveGoneClientForge;
 import net.potionstudios.biomeswevegone.world.entity.BWGEntities;
 import net.potionstudios.biomeswevegone.world.level.levelgen.biome.BWGOverworldSurfaceRules;
 import net.potionstudios.biomeswevegone.world.level.levelgen.biome.BWGTerraBlenderRegion;
-import software.bernie.geckolib.GeckoLib;
 import terrablender.api.SurfaceRuleManager;
 
 import java.util.function.Consumer;
@@ -40,7 +39,6 @@ public class BiomesWeveGoneForge {
         MOD_BUS.addListener((Consumer<EntityAttributeCreationEvent>) event -> BWGEntities.registerEntityAttributes(event::put));
         VanillaCompatForge.registerVanillaCompatEvents(EVENT_BUS);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> BiomesWeveGoneClientForge.init(MOD_BUS));
-        GeckoLib.initialize();
         LootModifiersRegister.register(MOD_BUS);
     }
 

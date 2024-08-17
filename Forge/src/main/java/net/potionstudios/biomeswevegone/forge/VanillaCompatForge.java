@@ -101,7 +101,7 @@ public class VanillaCompatForge {
                         List<ConfiguredFeature<?, ?>> list = level.getBiome(blockPos2).value().getGenerationSettings().getFlowerFeatures();
                         if (list.isEmpty()) continue;
 
-                        holder = ((RandomPatchConfiguration) list.get(0).config()).feature();
+                        holder = ((RandomPatchConfiguration) list.getFirst().config()).feature();
                     } else {
                         if (!optional.isPresent()) continue;
                         holder = optional.get();
