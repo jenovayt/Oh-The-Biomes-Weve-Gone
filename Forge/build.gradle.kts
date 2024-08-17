@@ -47,9 +47,7 @@ loom {
 }
 
 dependencies {
-    if ((project.properties["use_neoforge"] as String).toBoolean())
-        forge("net.neoforged:forge:$minecraftVersion-${project.properties["neoforge_version"]}")
-    else forge("net.minecraftforge:forge:$minecraftVersion-${project.properties["forge_version"]}")
+    forge("net.minecraftforge:forge:$minecraftVersion-${project.properties["forge_version"]}")
 
 
     "common"(project(":Common", "namedElements")) { isTransitive = false }
@@ -59,10 +57,10 @@ dependencies {
 
     implementation("com.eliotlash.mclib:mclib:20")
     forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20")
-    modApi("com.github.glitchfiend:TerraBlender-forge:$minecraftVersion-${project.properties["terrablender_version"]}")
-    modApi("corgitaco.corgilib:Corgilib-Forge:$minecraftVersion-${project.properties["corgilib_version"]}")
+    modApi("com.github.glitchfiend:TerraBlender-forge:1.21-${project.properties["terrablender_version"]}")
+    modApi("corgitaco.corgilib:Corgilib-Forge:1.20.1-${project.properties["corgilib_version"]}")
     modApi("dev.corgitaco:Oh-The-Trees-Youll-Grow-forge:$minecraftVersion-${project.properties["ohthetreesyoullgrow_version"]}")
-    modApi("software.bernie.geckolib:geckolib-forge-$minecraftVersion:${project.properties["geckolib_version"]}")
+    modApi("software.bernie.geckolib:geckolib-forge-1.21:${project.properties["geckolib_version"]}")
 
     modCompileOnly("mcp.mobius.waila:wthit-api:forge-${project.properties["WTHIT"]}")  { isTransitive = false }
     modRuntimeOnly("mcp.mobius.waila:wthit:forge-${project.properties["WTHIT"]}")  { isTransitive = false }
@@ -70,7 +68,7 @@ dependencies {
 
     modRuntimeOnly("maven.modrinth:cyanide:4.1.0")  { isTransitive = false }
 
-    modApi("com.github.glitchfiend:SereneSeasons:$minecraftVersion-9.0.0.46") { isTransitive = false}
+    modApi("com.github.glitchfiend:SereneSeasons-forge:1.21-10.0.0.6") { isTransitive = false}
 }
 
 tasks {
