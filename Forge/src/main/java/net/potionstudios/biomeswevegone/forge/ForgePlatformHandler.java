@@ -1,7 +1,7 @@
 package net.potionstudios.biomeswevegone.forge;
 
 import com.google.auto.service.AutoService;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -87,17 +87,12 @@ public class ForgePlatformHandler implements PlatformHandler {
 
 	@Override
 	public Supplier<FlowerPotBlock> createPottedBlock(Supplier<? extends Block> block) {
-		return () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, block, BlockBehaviour.Properties.copy(Blocks.FLOWER_POT));
+		return () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, block, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT));
 	}
 
 	@Override
 	public Supplier<MobBucketItem> createMobBucket(Supplier<EntityType<? extends Mob>> entity, Supplier<Fluid> fluid, Supplier<SoundEvent> sound) {
 		return () -> new MobBucketItem(entity, fluid, sound, new Item.Properties().stacksTo(1));
-	}
-
-	@Override
-	public Supplier<RecordItem> createRecordItem(int comparatorValue, Supplier<SoundEvent> sound, int lengthInSeconds) {
-		return () -> new RecordItem(comparatorValue, sound, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), lengthInSeconds * 20);
 	}
 
 	@Override
@@ -134,7 +129,7 @@ public class ForgePlatformHandler implements PlatformHandler {
 	private static final DeferredRegister<BlockPredicateType<?>> BLOCK_PREDICATE_TYPE = DeferredRegister.create(Registries.BLOCK_PREDICATE_TYPE, BiomesWeveGone.MOD_ID);
 
 	@Override
-	public <P extends BlockPredicate> Supplier<BlockPredicateType<P>> registerBlockPredicate(String id, Supplier<Codec<P>> codec) {
+	public <P extends BlockPredicate> Supplier<BlockPredicateType<P>> registerBlockPredicate(String id, Supplier<MapCodec<P>> codec) {
 		return BLOCK_PREDICATE_TYPE.register(id, () -> codec::get);
 	}
 
@@ -155,12 +150,12 @@ public class ForgePlatformHandler implements PlatformHandler {
 		BWGBlocks.BLOCKS.forEach(entry -> {
 			if (entry.get() instanceof FlowerPotBlock)
 				((FlowerPotBlock) Blocks.FLOWER_POT)
-						.addPlant(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(((FlowerPotBlock) entry.get()).getContent())), entry);
+						.addPlant(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(((FlowerPotBlock) entry.get()).getPotted())), entry);
 		});
 		BWGWood.WOOD.forEach(entry -> {
 			if (entry.get() instanceof FlowerPotBlock)
 				((FlowerPotBlock) Blocks.FLOWER_POT)
-						.addPlant(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(((FlowerPotBlock) entry.get()).getContent())), entry);
+						.addPlant(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(((FlowerPotBlock) entry.get()).getPotted())), entry);
 		});
 	}
 

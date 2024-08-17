@@ -26,7 +26,6 @@ import net.potionstudios.biomeswevegone.world.level.levelgen.structure.processor
 import net.potionstudios.biomeswevegone.world.level.levelgen.structure.village.PlaceInVillage;
 import net.potionstudios.biomeswevegone.world.level.levelgen.surfacerules.BWGRuleSources;
 import org.slf4j.Logger;
-import software.bernie.geckolib.GeckoLib;
 
 /**
  * The main class for Oh The Biomes We've Gone.
@@ -62,7 +61,6 @@ public class BiomesWeveGone {
         BWGTemplatePools.templatePools();
         BWGPoiTypes.poiTypes();
         BWGVillagerProfessions.professions();
-        GeckoLib.initialize();
     }
 
     /**
@@ -95,6 +93,6 @@ public class BiomesWeveGone {
      * @return the new resource location with the Biomes We've Gone location
      */
     public static ResourceLocation id(String name) {
-        return new ResourceLocation(MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 }

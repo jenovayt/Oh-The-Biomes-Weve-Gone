@@ -24,9 +24,6 @@
     "client": [
       "net.potionstudios.biomeswevegone.fabric.client.BiomesWeveGoneClientFabric"
     ],
-    "fabric-datagen": [
-      "net.potionstudios.biomeswevegone.fabric.datagen.FabricDatagen"
-    ],
     "terrablender": [
       "net.potionstudios.biomeswevegone.fabric.BWGTerrablenderEntry"
     ]

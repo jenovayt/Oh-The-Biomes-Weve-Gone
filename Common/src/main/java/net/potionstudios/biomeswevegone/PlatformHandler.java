@@ -1,6 +1,6 @@
 package net.potionstudios.biomeswevegone;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -102,7 +102,7 @@ public interface PlatformHandler {
 	 * @return Supplier of the FlowerPotBlock
 	 */
 	default Supplier<FlowerPotBlock> createPottedBlock(Supplier<? extends Block> block) {
-		return () -> new FlowerPotBlock(block.get(), FlowerPotBlock.Properties.copy(Blocks.FLOWER_POT));
+		return () -> new FlowerPotBlock(block.get(), FlowerPotBlock.Properties.ofFullCopy(Blocks.FLOWER_POT));
 	}
 
 	/**
@@ -115,18 +115,6 @@ public interface PlatformHandler {
 	 */
 	default Supplier<MobBucketItem> createMobBucket(Supplier<EntityType<? extends Mob>> entity, Supplier<Fluid> fluid, Supplier<SoundEvent> sound) {
 		return () -> new MobBucketItem(entity.get(), fluid.get(), sound.get(), new Item.Properties().stacksTo(1));
-	}
-
-	/**
-	 * Creates a record item with the specified parameters
-	 * @see RecordItem
-	 * @param comparatorValue Redstone conductor value
-	 * @param sound The sound to be played when the record is played
-	 * @param lengthInSeconds The length of the sound in seconds
-	 * @return Supplier of the RecordItem
-	 */
-	default Supplier<RecordItem> createRecordItem(int comparatorValue, Supplier<SoundEvent> sound, int lengthInSeconds) {
-		return () -> new RecordItem(comparatorValue, sound.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE), lengthInSeconds);
 	}
 
 	default Supplier<BWGFarmLandBlock> bwgFarmLandBlock(Supplier<Block> dirt) {
@@ -168,7 +156,7 @@ public interface PlatformHandler {
 		return loadedService;
 	}
 
-	<P extends BlockPredicate> Supplier<BlockPredicateType<P>> registerBlockPredicate(String id, Supplier<Codec<P>> codec);
+	<P extends BlockPredicate> Supplier<BlockPredicateType<P>> registerBlockPredicate(String id, Supplier<MapCodec<P>> codec);
 
 	<T> Supplier<T> register(Registry<? super T> registry, String name, Supplier<T> value);
 
