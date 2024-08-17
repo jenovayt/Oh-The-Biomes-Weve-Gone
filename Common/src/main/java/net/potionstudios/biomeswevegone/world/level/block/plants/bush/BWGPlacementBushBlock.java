@@ -1,5 +1,6 @@
 package net.potionstudios.biomeswevegone.world.level.block.plants.bush;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.BlockGetter;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 public class BWGPlacementBushBlock extends BushBlock {
     private final VoxelShape SHAPE;
     private final TagKey<Block> validGround;
+    protected abstract MapCodec<? extends BushBlock> codec();
     public BWGPlacementBushBlock(Properties properties, VoxelShape shape, TagKey<Block> validGround) {
         super(properties);
         this.SHAPE = shape;

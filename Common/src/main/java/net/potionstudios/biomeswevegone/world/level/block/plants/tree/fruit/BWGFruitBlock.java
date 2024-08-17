@@ -50,7 +50,7 @@ public class BWGFruitBlock extends Block implements BonemealableBlock {
     }
 
     public BWGFruitBlock(Supplier<Supplier<Item>> fruit, String leaves) {
-        this(Properties.copy(Blocks.SWEET_BERRY_BUSH), fruit, leaves);
+        this(Properties.ofFullCopy(Blocks.SWEET_BERRY_BUSH), fruit, leaves);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class BWGFruitBlock extends Block implements BonemealableBlock {
     }
 
     @Override
-    public @NotNull ItemStack getCloneItemStack(@NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull BlockState state) {
+    public @NotNull ItemStack getCloneItemStack(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state) {
         return this.fruit.get().get().getDefaultInstance();
     }
 
@@ -110,7 +110,7 @@ public class BWGFruitBlock extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(@NotNull LevelReader level, @NotNull BlockPos pos, BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(@NotNull LevelReader level, @NotNull BlockPos pos, BlockState state) {
         return state.getValue(AGE) < MAX_AGE;
     }
 

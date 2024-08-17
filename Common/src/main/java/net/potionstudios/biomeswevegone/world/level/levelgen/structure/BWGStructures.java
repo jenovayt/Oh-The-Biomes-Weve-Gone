@@ -7,7 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Structures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -318,7 +318,7 @@ public class BWGStructures {
 
     @FunctionalInterface
     public interface StructureFactory {
-        Structure generate(BootstapContext<Structure> structureFactoryBootstapContext);
+        Structure generate(BootstrapContext<Structure> structureFactoryBootstapContext);
     }
 
 }

@@ -33,7 +33,7 @@ public class CarvedBarrelCactusBlock extends BWGCactusBlock {
 	public static final EnumProperty<LiquidType> LIQUID = EnumProperty.create("liquid", LiquidType.class);
 
 	public CarvedBarrelCactusBlock() {
-		super(BlockBehaviour.Properties.copy(Blocks.CACTUS).noOcclusion());
+		super(BlockBehaviour.Properties.ofFullCopy(Blocks.CACTUS).noOcclusion());
 		this.registerDefaultState(this.stateDefinition.any().setValue(LIQUID, LiquidType.EMPTY));
 	}
 

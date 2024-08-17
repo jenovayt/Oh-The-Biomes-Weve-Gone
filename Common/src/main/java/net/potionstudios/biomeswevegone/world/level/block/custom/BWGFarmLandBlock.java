@@ -29,7 +29,7 @@ public class BWGFarmLandBlock extends FarmBlock {
     private final Supplier<Block> dirt;
 
     public BWGFarmLandBlock(Supplier<Block> dirt) {
-        super(BlockBehaviour.Properties.copy(Blocks.FARMLAND).strength(0.2f));
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND).strength(0.2f));
         this.dirt = dirt;
     }
 
