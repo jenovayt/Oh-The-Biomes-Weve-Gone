@@ -22,7 +22,7 @@ public class FlowerableBushBlock extends BushBlock implements BonemealableBlock 
     }
 
     @Override
-    public boolean isValidBonemealTarget(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state) {
         return true;
     }
 

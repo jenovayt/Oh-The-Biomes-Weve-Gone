@@ -16,11 +16,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class HydrangeaBushBlock extends BWGPlacementBushBlock implements BonemealableBlock {
     public HydrangeaBushBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.AZALEA).noCollission(), Block.box(0, 0, 0, 16, 16, 16), BWGBlockTags.HYDRANGEA_BUSH_PLACEABLE);
+        super(BlockBehaviour.Properties.ofFullCopy(Blocks.AZALEA).noCollission(), Block.box(0, 0, 0, 16, 16, 16), BWGBlockTags.HYDRANGEA_BUSH_PLACEABLE);
     }
 
     @Override
-    public boolean isValidBonemealTarget(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state, boolean isClient) {
+    public boolean isValidBonemealTarget(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state) {
         return true;
     }
 
