@@ -7,23 +7,23 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class BWGTallFlowerBlockTreeGrower extends BWGTallFlowerBlock {
+public class BWGTallFlowerBlockTreeGrower extends TreeGrower {
 
-    private final Supplier<AbstractTreeGrower> treeGrower;
+    private final Supplier<TreeGrower> treeGrower;
 
-    public BWGTallFlowerBlockTreeGrower(Properties properties, TagKey<Block> validGround, Supplier<AbstractTreeGrower> treeGrower) {
+    public BWGTallFlowerBlockTreeGrower(Properties properties, TagKey<Block> validGround, Supplier<TreeGrower> treeGrower) {
         super(properties, validGround);
         this.treeGrower = treeGrower;
     }
 
-    public BWGTallFlowerBlockTreeGrower(Properties properties, Supplier<AbstractTreeGrower> treeGrower) {
+    public BWGTallFlowerBlockTreeGrower(Properties properties, Supplier<TreeGrower> treeGrower) {
         super(properties);
         this.treeGrower = treeGrower;
     }
