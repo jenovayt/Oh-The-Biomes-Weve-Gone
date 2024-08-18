@@ -1,5 +1,6 @@
 package net.potionstudios.biomeswevegone.world.level.block.plants.bush;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;

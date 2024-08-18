@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -70,21 +71,19 @@ public class BWGFruitBlock extends Block implements BonemealableBlock {
     }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
-        boolean maxAge = state.getValue(AGE) == MAX_AGE;
+    protected @NotNull ItemInteractionResult useItemOn(@NotNull ItemStack stack, BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
+        return (state.getValue(AGE) != MAX_AGE) && stack.is(Items.BONE_MEAL) ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION : super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
 
-        if (!maxAge && player.getItemInHand(hand).is(Items.BONE_MEAL))
-            return InteractionResult.PASS;
-
-        if (maxAge) {
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (state.getValue(AGE) == MAX_AGE) {
             popResource(level, pos, this.fruit.get().get().getDefaultInstance());
             level.playSound(player, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
             level.setBlock(pos, state.setValue(AGE, 0), 2);
-
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
-
-        return super.use(state, level, pos, player, hand, hit);
+        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
     @Override
