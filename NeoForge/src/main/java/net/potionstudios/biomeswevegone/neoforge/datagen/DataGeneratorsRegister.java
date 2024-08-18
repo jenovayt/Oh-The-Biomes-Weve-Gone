@@ -1,6 +1,5 @@
 package net.potionstudios.biomeswevegone.neoforge.datagen;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistrySetBuilder;
@@ -10,7 +9,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.world.BiomeModifiers;
@@ -53,9 +51,9 @@ class DataGeneratorsRegister {
 
         ModelGenerators.init(generator, event.includeClient(), output, existingFileHelper);
         generator.addProvider(event.includeClient(), new LangGenerator(output, "en_us"));
-        generator.addProvider(event.includeServer(), new RecipeGenerator(output));
-        generator.addProvider(event.includeServer(), new LootGenerator(output));
-        generator.addProvider(event.includeServer(), new GlobalLootModifiersGenerator(output));
+        generator.addProvider(event.includeServer(), new RecipeGenerator(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new LootGenerator(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new GlobalLootModifiersGenerator(output, lookupProvider));
         BWGBiomeModifiers.init();
         DatapackBuiltinEntriesProvider datapackBuiltinEntriesProvider = new DatapackBuiltinEntriesProvider(output, lookupProvider, BUILDER, Set.of(BiomesWeveGone.MOD_ID));
         generator.addProvider(event.includeServer(), datapackBuiltinEntriesProvider);

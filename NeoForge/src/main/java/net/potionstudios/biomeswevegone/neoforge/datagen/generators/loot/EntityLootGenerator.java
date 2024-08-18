@@ -1,14 +1,14 @@
 package net.potionstudios.biomeswevegone.neoforge.datagen.generators.loot;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
+import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -21,8 +21,8 @@ import java.util.stream.Stream;
 
 class EntityLootGenerator extends EntityLootSubProvider {
     private static final ArrayList<EntityType<?>> knownEntities = new ArrayList<>();
-    protected EntityLootGenerator() {
-        super(FeatureFlags.REGISTRY.allFlags());
+    protected EntityLootGenerator(HolderLookup.Provider lookupProvider) {
+        super(FeatureFlags.REGISTRY.allFlags(), lookupProvider);
     }
 
     @Override
@@ -40,19 +40,19 @@ class EntityLootGenerator extends EntityLootSubProvider {
                                 .setRolls(ConstantValue.exactly(1))
                                 .add(LootItem.lootTableItem(Items.STRING)
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0f, 5.0f)))
-                                        .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0f, 2.0f))))
+                                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0f, 2.0f))))
                 ).withPool(
                         LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))
                                 .add(LootItem.lootTableItem(Items.PHANTOM_MEMBRANE)
-                                        .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0f, 1.0f)))
+                                        .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0f, 1.0f)))
                 )));
     }
 
     @Override
-    protected void add(@NotNull EntityType<?> entityType, @NotNull ResourceLocation lootTableLocation, LootTable.@NotNull Builder builder) {
+    protected void add(@NotNull EntityType<?> entityType, LootTable.@NotNull Builder builder) {
+        super.add(entityType, builder);
         knownEntities.add(entityType);
-        super.add(entityType, lootTableLocation, builder);
     }
 
     @Override

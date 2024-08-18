@@ -1,5 +1,6 @@
 package net.potionstudios.biomeswevegone.neoforge.datagen.generators;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
@@ -18,6 +19,7 @@ import net.potionstudios.biomeswevegone.world.level.block.wood.BWGWood;
 import net.potionstudios.biomeswevegone.world.level.block.wood.BWGWoodSet;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 /**
@@ -26,8 +28,8 @@ import java.util.function.Consumer;
  * @author Joseph T. McQuigg
  */
 public class RecipeGenerator extends RecipeProvider {
-    public RecipeGenerator(PackOutput output) {
-        super(output);
+    public RecipeGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider);
     }
 
     @Override

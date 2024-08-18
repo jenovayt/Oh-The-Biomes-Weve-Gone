@@ -2,7 +2,9 @@ package net.potionstudios.biomeswevegone.neoforge.datagen.generators.loot;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -34,20 +36,17 @@ import net.potionstudios.biomeswevegone.world.level.block.wood.BWGWoodSet;
 import net.potionstudios.biomeswevegone.world.level.block.wood.ImbuedBlock;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 class BlockLootGenerator extends BlockLootSubProvider {
 
     private final List<Block> knownBlocks = new ArrayList<>();
     private static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(BWGItemTags.SHEARS));
 
-
-    public BlockLootGenerator() {
-        super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags());
+    protected BlockLootGenerator(HolderLookup.Provider registries) {
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
+
 
     @Override
     protected void generate() {
@@ -109,7 +108,7 @@ class BlockLootGenerator extends BlockLootSubProvider {
                 add(block, createShearsDispatchTable(block, LootItem.lootTableItem(block.asItem())));
             else if (block instanceof VineBlock)
                 add(block, createShearsDispatchTable(block, LootItem.lootTableItem(block)));
-            else if (block instanceof GlassBlock || block instanceof StainedGlassPaneBlock)
+            else if (block instanceof TransparentBlock || block instanceof StainedGlassPaneBlock)
                 dropWhenSilkTouch(block);
             else if (block instanceof FlowerPotBlock)
                 dropPottedContents(block);
@@ -186,7 +185,7 @@ class BlockLootGenerator extends BlockLootSubProvider {
                                 .withPool(
                                         LootPool.lootPool()
                                                 .when(holder)
-                                                .add(LootItem.lootTableItem(BWGItems.ODDION_BULB.get()).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE,  0.7714286F, 1)))
+                                                .add(LootItem.lootTableItem(BWGItems.ODDION_BULB.get()).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.FORTUNE,  0.7714286F, 1)))
                                 )
                 )
         );

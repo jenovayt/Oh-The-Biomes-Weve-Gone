@@ -1,12 +1,13 @@
 package net.potionstudios.biomeswevegone.neoforge.datagen.generators.loot;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.saveddata.maps.MapDecoration;
+import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -25,22 +26,24 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiConsumer;
 
-/**
- * Generates BWG loot tables for chests.
- * @see  LootTableSubProvider
- * @author Joseph T. McQuigg
- */
-class ChestLootGenerator implements LootTableSubProvider {
+public class ChestLootGenerator implements LootTableSubProvider {
+
+    private final HolderLookup.Provider lookupProvider;
+
+    public ChestLootGenerator(HolderLookup.Provider lookupProvider) {
+        this.lookupProvider = lookupProvider;
+    }
+
     @Override
     public void generate(@NotNull BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
         createTable(output,"village/forgotten/house", 3.0f, 8.0f,
-            lootItemWithCount(BWGBlocks.SHELF_FUNGI.get(), 1, 4).setWeight(9),
-            lootItemWithCount(Blocks.MOSS_BLOCK, 1, 7),
-            lootItemWithCount(BWGItems.ALLIUM_ODDION_SOUP.get(), 1, 2).setWeight(1),
-            lootItemWithCount(BWGItems.ODDION_BULB.get(), 2, 8).setWeight(10),
-            lootItemWithCount(Items.AMETHYST_SHARD, 2, 4).setWeight(2),
-            lootItemWithCount(Items.EMERALD, 1, 4).setWeight(1),
-            lootItemWithCount(Items.MELON_SLICE, 1, 9).setWeight(8));
+                lootItemWithCount(BWGBlocks.SHELF_FUNGI.get(), 1, 4).setWeight(9),
+                lootItemWithCount(Blocks.MOSS_BLOCK, 1, 7),
+                lootItemWithCount(BWGItems.ALLIUM_ODDION_SOUP.get(), 1, 2).setWeight(1),
+                lootItemWithCount(BWGItems.ODDION_BULB.get(), 2, 8).setWeight(10),
+                lootItemWithCount(Items.AMETHYST_SHARD, 2, 4).setWeight(2),
+                lootItemWithCount(Items.EMERALD, 1, 4).setWeight(1),
+                lootItemWithCount(Items.MELON_SLICE, 1, 9).setWeight(8));
 
         createTable(output,"village/forgotten/armorer", 3.0f, 8.0f,
                 lootItemWithCount(Items.RAW_IRON, 2, 7).setWeight(2),
@@ -92,10 +95,10 @@ class ChestLootGenerator implements LootTableSubProvider {
                 lootItem(Items.BOOK),
                 lootItem(BWGWood.SKYRIS.bookshelf()),
                 lootItemWithCount(Items.EMERALD, 1, 4).setWeight(2),
-                lootItem(Items.BOOK).apply(EnchantWithLevelsFunction.enchantWithLevels(ConstantValue.exactly(30)).allowTreasure()),
-                lootItem(Items.MAP).apply(ExplorationMapFunction.makeExplorationMap().setZoom((byte)1).setMapDecoration(MapDecoration.Type.RED_X).setSkipKnownStructures(false)));
+                lootItem(Items.BOOK).apply(EnchantWithLevelsFunction.enchantWithLevels(lookupProvider, ConstantValue.exactly(30))),
+                lootItem(Items.MAP).apply(ExplorationMapFunction.makeExplorationMap().setZoom((byte)1).setMapDecoration(MapDecorationTypes.RED_X).setSkipKnownStructures(false)));
 
-        createTable(output, "village/salem/house", 3.0f, 8.0f, 
+        createTable(output, "village/salem/house", 3.0f, 8.0f,
                 lootItemWithCount(BWGItems.WHITE_PUFFBALL_STEW.get(), 1, 3).setWeight(6),
                 lootItem(Items.EMERALD).setWeight(2),
                 lootItem(Items.BREAD),
@@ -196,9 +199,9 @@ class ChestLootGenerator implements LootTableSubProvider {
         return LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max)));
     }
 
-    private void createTable(BiConsumer<ResourceLocation, LootTable.Builder> output, String id, float minRolls, float maxRolls, LootPoolEntryContainer.Builder<?>... entriesBuilder) {
+    private void createTable(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output, String id, float minRolls, float maxRolls, LootPoolEntryContainer.Builder<?>... entriesBuilder) {
         LootPool.Builder pool = LootPool.lootPool().setRolls(UniformGenerator.between(minRolls, maxRolls));
         for (LootPoolEntryContainer.Builder<?> entry : entriesBuilder) pool.add(entry);
-        output.accept(BiomesWeveGone.id("chests/" + id), LootTable.lootTable().withPool(pool));
+        output.accept(ResourceKey.create(Registries.LOOT_TABLE, BiomesWeveGone.id("chests/" + id)), LootTable.lootTable().withPool(pool));
     }
 }
