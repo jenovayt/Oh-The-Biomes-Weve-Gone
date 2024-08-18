@@ -164,6 +164,7 @@ public interface PlatformHandler {
 
 	enum Platform {
 		FORGE,
-		FABRIC
+		FABRIC,
+		NEOFORGE
 	}
 }
