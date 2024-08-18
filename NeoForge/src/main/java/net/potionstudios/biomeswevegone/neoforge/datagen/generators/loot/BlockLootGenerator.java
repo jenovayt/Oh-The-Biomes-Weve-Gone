@@ -1,4 +1,4 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators.loot;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators.loot;
 
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;

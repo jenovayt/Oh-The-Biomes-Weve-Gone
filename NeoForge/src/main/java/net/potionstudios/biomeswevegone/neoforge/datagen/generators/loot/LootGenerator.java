@@ -1,4 +1,4 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators.loot;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators.loot;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.PackOutput;

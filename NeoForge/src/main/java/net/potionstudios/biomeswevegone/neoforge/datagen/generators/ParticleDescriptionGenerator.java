@@ -1,8 +1,8 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators;
 
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.ParticleDescriptionProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
 import net.potionstudios.biomeswevegone.client.particle.BWGParticles;
 

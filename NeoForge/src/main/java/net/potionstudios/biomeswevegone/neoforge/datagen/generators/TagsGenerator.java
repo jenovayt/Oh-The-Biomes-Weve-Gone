@@ -1,16 +1,15 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
 import net.potionstudios.biomeswevegone.tags.BWGBiomeTags;
 import net.potionstudios.biomeswevegone.tags.BWGBlockTags;
@@ -112,9 +111,10 @@ public class TagsGenerator {
                 tag(set.getSandstoneSlabsTag()).add(set.getSandstoneSlab(), set.getSmoothSandstoneSlab(), set.getCutSandstoneSlab());
                 tag(set.getSandstoneStairsTag()).add(set.getSandstoneStairs(), set.getSmoothSandstoneStairs());
                 tag(set.getSandBlockTag()).add(set.getSand());
-                tag(Tags.Blocks.SANDSTONE).addTag(set.getSandstoneBlocksTag());
-                tag(Tags.Blocks.SAND).addTag(set.getSandBlockTag());
-
+                tag(Tags.Blocks.SANDSTONE_BLOCKS).addTag(set.getSandstoneBlocksTag());
+                tag(Tags.Blocks.SANDS).addTag(set.getSandBlockTag());
+                tag(Tags.Blocks.SANDSTONE_SLABS).addTag(set.getSandstoneSlabsTag());
+                tag(Tags.Blocks.SANDSTONE_STAIRS).addTag(set.getSandstoneStairsTag());
             });
             tag(BlockTags.FLOWERS).add(BWGBlocks.FLOWER_PATCH.get(), BWGBlocks.WHITE_SAKURA_PETALS.get(), BWGBlocks.YELLOW_SAKURA_PETALS.get(), BWGBlocks.FLOWERING_BARREL_CACTUS.get(), BWGBlocks.FLOWERING_TINY_LILY_PADS.get());
             tag(BWGBlockTags.BLACK_ICE).add(BWGBlocks.BLACK_ICE.get(), BWGBlocks.PACKED_BLACK_ICE.get());
@@ -147,7 +147,7 @@ public class TagsGenerator {
             if (object instanceof SlabBlock) tag(BlockTags.SLABS).add(object);
             else if (object instanceof StairBlock) tag(BlockTags.STAIRS).add(object);
             else if (object instanceof WallBlock) tag(BlockTags.WALLS).add(object);
-            else if (object instanceof SandBlock) tag(BlockTags.SAND).add(object);
+            else if (object instanceof ColoredFallingBlock) tag(BlockTags.SAND).add(object);
             else if (object instanceof FlowerBlock) tag(BlockTags.SMALL_FLOWERS).add(object);
             else if (object instanceof TallFlowerBlock) tag(BlockTags.TALL_FLOWERS).add(object);
             else if (object instanceof LeavesBlock) tag(BlockTags.LEAVES).add(object);
@@ -213,8 +213,8 @@ public class TagsGenerator {
                 copy(set.getSandstoneSlabsTag(), set.getSandstoneSlabsItemTag());
                 copy(set.getSandstoneStairsTag(), set.getSandstoneStairsItemTag());
             });
-            copy(Tags.Blocks.SANDSTONE, Tags.Items.SANDSTONE);
-            copy(Tags.Blocks.SAND, Tags.Items.SAND);
+            copy(Tags.Blocks.SANDSTONE_BLOCKS, Tags.Items.SANDSTONE_BLOCKS);
+            copy(Tags.Blocks.SANDS, Tags.Items.SANDS);
             copy(BWGBlockTags.BLACK_ICE, BWGItemTags.BLACK_ICE);
             copy(BWGBlockTags.BOREALIS_ICE, BWGItemTags.BOREALIS_ICE);
 
@@ -254,8 +254,8 @@ public class TagsGenerator {
                     }
             );
             copy(BWGBlockTags.PALO_VERDE_LOGS, BWGItemTags.PALO_VERDE_LOGS);
-            tag(BWGItemTags.SHEARS).addOptionalTag(Tags.Items.SHEARS).addOptionalTag(new ResourceLocation("c", "shears"));
-            tag(ItemTags.MUSIC_DISCS).add(BWGItems.MUSIC_DISC_PIXIE_CLUB.get());
+            tag(BWGItemTags.SHEARS).addOptionalTag(Tags.Items.TOOLS_SHEAR);
+            tag(Tags.Items.MUSIC_DISCS).add(BWGItems.MUSIC_DISC_PIXIE_CLUB.get());
             tag(ItemTags.STONE_CRAFTING_MATERIALS).add(BWGBlocks.ROCKY_STONE_SET.getBase().asItem());
             tag(ItemTags.VILLAGER_PLANTABLE_SEEDS).add(BWGItems.ODDION_BULB.get());
             tag(Tags.Items.MUSHROOMS).add(BWGBlocks.GREEN_MUSHROOM.get().asItem(), BWGBlocks.WEEPING_MILKCAP.get().asItem(), BWGBlocks.WOOD_BLEWIT.get().asItem());
@@ -280,8 +280,8 @@ public class TagsGenerator {
             tag(Tags.Biomes.IS_COLD_OVERWORLD).addTag(BWGBiomeTags.COLD);
             tag(Tags.Biomes.IS_WET_OVERWORLD).addTag(BWGBiomeTags.WET);
             tag(Tags.Biomes.IS_DRY_OVERWORLD).addTag(BWGBiomeTags.DRY);
-            tag(Tags.Biomes.IS_SPARSE_OVERWORLD).addTag(BWGBiomeTags.SPARSE);
-            tag(Tags.Biomes.IS_DENSE_OVERWORLD).addTag(BWGBiomeTags.DENSE);
+            tag(Tags.Biomes.IS_SPARSE_VEGETATION_OVERWORLD).addTag(BWGBiomeTags.SPARSE);
+            tag(Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD).addTag(BWGBiomeTags.DENSE);
 
             tag(Tags.Biomes.IS_PLAINS).addTag(BWGBiomeTags.PLAINS);
             tag(BiomeTags.IS_FOREST).addTag(BWGBiomeTags.FOREST);
@@ -293,13 +293,13 @@ public class TagsGenerator {
             tag(Tags.Biomes.IS_MOUNTAIN).addTag(BWGBiomeTags.MOUNTAIN);
             tag(BiomeTags.IS_BEACH).addTag(BWGBiomeTags.BEACH);
             tag(BiomeTags.IS_BADLANDS).addTag(BWGBiomeTags.BADLANDS);
-            tag(Tags.Biomes.IS_SLOPE).addTag(BWGBiomeTags.SLOPE);
-            tag(Tags.Biomes.IS_PEAK).addTag(BWGBiomeTags.PEAK);
+            tag(Tags.Biomes.IS_MOUNTAIN_SLOPE).addTag(BWGBiomeTags.SLOPE);
+            tag(Tags.Biomes.IS_MOUNTAIN_PEAK).addTag(BWGBiomeTags.PEAK);
             tag(Tags.Biomes.IS_SWAMP).addTag(BWGBiomeTags.SWAMP);
             tag(Tags.Biomes.IS_SANDY).addTag(BWGBiomeTags.SANDY);
             tag(Tags.Biomes.IS_SNOWY).addTag(BWGBiomeTags.SNOWY);
             tag(BiomeTags.IS_OCEAN).addTag(BWGBiomeTags.OCEAN);
-            tag(Tags.Biomes.IS_CONIFEROUS).addTag(BWGBiomeTags.CONIFEROUS);
+            tag(Tags.Biomes.IS_CONIFEROUS_TREE).addTag(BWGBiomeTags.CONIFEROUS);
             tag(Tags.Biomes.IS_WASTELAND).addTag(BWGBiomeTags.WASTELAND);
             tag(Tags.Biomes.IS_MAGICAL).addTag(BWGBiomeTags.MAGICAL);
 

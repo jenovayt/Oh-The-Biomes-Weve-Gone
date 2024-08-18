@@ -1,13 +1,13 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
 import net.potionstudios.biomeswevegone.world.entity.BWGEntities;
 import net.potionstudios.biomeswevegone.world.item.BWGCreativeTabs;
@@ -92,11 +92,11 @@ public class LangGenerator extends LanguageProvider {
 
 
     private String getBlockName(Supplier<? extends Block> item) {
-        return getId((ForgeRegistries.BLOCKS.getKey(item.get()).getPath()));
+        return getId((BuiltInRegistries.BLOCK.getKey(item.get()).getPath()));
     }
 
     private String getItemName(Supplier<? extends ItemLike> item) {
-        return getId(ForgeRegistries.ITEMS.getKey(item.get().asItem()).getPath());
+        return getId(BuiltInRegistries.ITEM.getKey(item.get().asItem()).getPath());
     }
 
     private String getBiomeName(ResourceKey<Biome> biome) {

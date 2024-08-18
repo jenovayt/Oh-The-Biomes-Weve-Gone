@@ -1,6 +1,7 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators.loot;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators.loot;
 
 import net.minecraft.data.loot.LootTableSubProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -31,7 +32,7 @@ import java.util.function.BiConsumer;
  */
 class ChestLootGenerator implements LootTableSubProvider {
     @Override
-    public void generate(@NotNull BiConsumer<ResourceLocation, LootTable.Builder> output) {
+    public void generate(@NotNull BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
         createTable(output,"village/forgotten/house", 3.0f, 8.0f,
             lootItemWithCount(BWGBlocks.SHELF_FUNGI.get(), 1, 4).setWeight(9),
             lootItemWithCount(Blocks.MOSS_BLOCK, 1, 7),

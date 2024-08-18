@@ -1,21 +1,20 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators;
 
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.models.model.ModelLocationUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.RecordItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraftforge.client.model.generators.*;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.client.model.generators.*;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
 import net.potionstudios.biomeswevegone.world.item.BWGItems;
 import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
@@ -101,7 +100,7 @@ public class ModelGenerators {
         }
 
         private ResourceLocation key(Item item) {
-            return ForgeRegistries.ITEMS.getKey(item);
+            return BuiltInRegistries.ITEM.getKey(item);
         }
     }
 
@@ -157,9 +156,9 @@ public class ModelGenerators {
                     paneBlockWithRenderType((IronBarsBlock) block, blockBWGTexture(name(block).replace("_pane", "")), blockBWGTexture(block, "top"), "translucent");
                     simpleItemBlockTexture(block, name(block).replace("_pane", ""));
                 } else if (block instanceof FlowerPotBlock) {
-                    if (((FlowerPotBlock) block).getContent() == BWGBlocks.WHITE_PUFFBALL.getBlock())
+                    if (((FlowerPotBlock) block).getPotted() == BWGBlocks.WHITE_PUFFBALL.getBlock())
                         simpleBlock(block, models().getExistingFile(blockBWGTexture(BWGBlocks.WHITE_PUFFBALL.getPottedBlock())));
-                    else simpleBlock(block, models().withExistingParent(name(block), mcLoc("block/flower_pot_cross")).texture("plant", blockBWGTexture(((FlowerPotBlock) block).getContent())).renderType("cutout"));
+                    else simpleBlock(block, models().withExistingParent(name(block), mcLoc("block/flower_pot_cross")).texture("plant", blockBWGTexture(((FlowerPotBlock) block).getPotted())).renderType("cutout"));
                 } else if (block instanceof HugeMushroomBlock)
                     simpleBlockItem(block, models().cubeAll(name(block) + "_inventory", blockBWGTexture(block)));
                 else if (block instanceof PinkPetalsBlock) {
@@ -210,7 +209,7 @@ public class ModelGenerators {
                     simpleBlockItemExistingModel(block);
                 } else {
                     if (block instanceof SaplingBlock) registerSaplingBlock(object.get(), blockBWGTexture(block));
-                    else if (block instanceof FlowerPotBlock) registerPottedSapling(object.get(), blockBWGTexture(((FlowerPotBlock) block).getContent()));
+                    else if (block instanceof FlowerPotBlock) registerPottedSapling(object.get(), blockBWGTexture(((FlowerPotBlock) block).getPotted()));
                     else if (block instanceof LeavesBlock) simpleBlockWithItem(block, models().leaves(name(block), blockBWGTexture(block)).renderType("cutout_mipped"));
                 }
             });
@@ -491,7 +490,7 @@ public class ModelGenerators {
         }
 
         private ResourceLocation key(Block block) {
-            return ForgeRegistries.BLOCKS.getKey(block);
+            return BuiltInRegistries.BLOCK.getKey(block);
         }
     }
 }

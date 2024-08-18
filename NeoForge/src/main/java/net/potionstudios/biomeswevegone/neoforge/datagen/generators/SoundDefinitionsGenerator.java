@@ -1,8 +1,8 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators;
 
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.SoundDefinitionsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
 import net.potionstudios.biomeswevegone.client.BWGSounds;
 
@@ -28,10 +28,10 @@ public class SoundDefinitionsGenerator extends SoundDefinitionsProvider {
         add(BWGSounds.ODDION_HURT, definition().with(sound(BiomesWeveGone.id("entity/oddion/oddion_hurt"))).subtitle(subtitle("entity.oddion_hurt")));
         add(BWGSounds.ODDION_DEATH, definition().with(sound(BiomesWeveGone.id("entity/oddion/oddion_death"))).subtitle(subtitle("entity.oddion_death")));
         add(BWGSounds.ODDION_HAPPY, definition().with(sound(BiomesWeveGone.id("entity/oddion/oddion_happy"))).subtitle(subtitle("entity.oddion_happy")));
-        add(BWGSounds.MUSIC_DISC_PIXIE_CLUB.get(), definition().with(sound(BiomesWeveGone.id("music/disc/pixie_club")).stream(true)));
-        add(BWGSounds.MUSIC_BIOME_CRAG_GARDENS.get(), definition().with(sound(BiomesWeveGone.id("music/overworld/crag_gardens"))));
-        add(BWGSounds.MUSIC_BIOME_ERODED_BOREALIS.get(), definition().with(sound(BiomesWeveGone.id("music/overworld/eroded_borealis"))));
-        add(BWGSounds.MUSIC_BIOME_FORGOTTEN_FOREST.get(), definition().with(sound(BiomesWeveGone.id("music/overworld/forgotten_forest"))));
+        add(BWGSounds.MUSIC_DISC_PIXIE_CLUB.get().value(), definition().with(sound(BiomesWeveGone.id("music/disc/pixie_club")).stream(true)));
+        add(BWGSounds.MUSIC_BIOME_CRAG_GARDENS.get().value(), definition().with(sound(BiomesWeveGone.id("music/overworld/crag_gardens"))));
+        add(BWGSounds.MUSIC_BIOME_ERODED_BOREALIS.get().value(), definition().with(sound(BiomesWeveGone.id("music/overworld/eroded_borealis"))));
+        add(BWGSounds.MUSIC_BIOME_FORGOTTEN_FOREST.get().value(), definition().with(sound(BiomesWeveGone.id("music/overworld/forgotten_forest"))));
     }
 
     private String subtitle(String subtitle) {

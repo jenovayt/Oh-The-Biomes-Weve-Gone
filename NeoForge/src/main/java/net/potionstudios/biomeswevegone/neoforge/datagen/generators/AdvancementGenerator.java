@@ -1,4 +1,4 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators;
 
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;

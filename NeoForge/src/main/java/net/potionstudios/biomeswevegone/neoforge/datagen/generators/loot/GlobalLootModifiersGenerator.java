@@ -1,12 +1,12 @@
-package net.potionstudios.biomeswevegone.forge.datagen.generators.loot;
+package net.potionstudios.biomeswevegone.neoforge.datagen.generators.loot;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.data.GlobalLootModifierProvider;
-import net.minecraftforge.common.loot.LootTableIdCondition;
+import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
+import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 import net.potionstudios.biomeswevegone.BiomesWeveGone;
-import net.potionstudios.biomeswevegone.forge.loot.AddItemModifier;
+import net.potionstudios.biomeswevegone.neoforge.loot.AddItemModifier;
 import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
 
 public class GlobalLootModifiersGenerator extends GlobalLootModifierProvider {
