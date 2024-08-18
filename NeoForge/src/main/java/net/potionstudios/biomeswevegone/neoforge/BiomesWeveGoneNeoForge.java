@@ -22,6 +22,7 @@ public class BiomesWeveGoneNeoForge {
 	public BiomesWeveGoneNeoForge(IEventBus eventBus) {
 		IEventBus EVENT_BUS = NeoForge.EVENT_BUS;
 		BiomesWeveGone.init();
+		NeoForgePlatformHandler.register(eventBus);
 		eventBus.addListener(this::onInitialize);
 		eventBus.addListener(this::onPostInitialize);
 		EVENT_BUS.addListener(this::onServerStarting);
@@ -38,7 +39,7 @@ public class BiomesWeveGoneNeoForge {
 			BiomesWeveGone.commonSetup();
 
 			BWGTerraBlenderRegion.registerTerrablenderRegions();
-
+			NeoForgePlatformHandler.registerPottedPlants();
 			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, BiomesWeveGone.MOD_ID, BWGOverworldSurfaceRules.makeRules());
 		});
 	}
