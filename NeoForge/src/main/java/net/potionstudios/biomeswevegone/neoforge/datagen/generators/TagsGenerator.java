@@ -92,6 +92,7 @@ public class TagsGenerator {
                 tag(set.logBlockTag()).add(set.logstem(), set.wood(), set.strippedLogStem(), set.strippedWood());
                 tag(BlockTags.LOGS).addTag(set.logBlockTag());
                 tag(BlockTags.LOGS_THAT_BURN).addTag(set.logBlockTag());
+                tag(Tags.Blocks.PLAYER_WORKSTATIONS_CRAFTING_TABLES).add(set.craftingTable());
             });
 
             tag(BWGBlockTags.PALO_VERDE_LOGS).add(BWGWood.PALO_VERDE_LOG.get(), BWGWood.STRIPPED_PALO_VERDE_LOG.get(), BWGWood.PALO_VERDE_WOOD.get(), BWGWood.STRIPPED_PALO_VERDE_WOOD.get());
@@ -142,6 +143,7 @@ public class TagsGenerator {
             tag(BlockTags.MINEABLE_WITH_HOE).add(BWGBlocks.ALLIUM_PETAL_BLOCK.get(), BWGBlocks.PINK_ALLIUM_PETAL_BLOCK.get(), BWGBlocks.WHITE_ALLIUM_PETAL_BLOCK.get(), BWGBlocks.ROSE_PETAL_BLOCK.get());
             tag(BlockTags.REPLACEABLE).add(BWGBlocks.PRAIRIE_GRASS.get(), BWGBlocks.TALL_PRAIRIE_GRASS.get(), BWGBlocks.BEACH_GRASS.get(), BWGBlocks.TALL_BEACH_GRASS.get(), BWGBlocks.SKYRIS_VINE.get());
             tag(BlockTags.SAND).add(BWGBlocks.SANDY_DIRT.get(), BWGBlocks.CRACKED_SAND.get());
+            tag(Tags.Blocks.BUDDING_BLOCKS).add(BWGWood.IMBUED_BLUE_ENCHANTED_WOOD.get(), BWGWood.IMBUED_GREEN_ENCHANTED_WOOD.get());
             sortTagsAlphabeticallyAndRemoveDuplicateTagEntries(this.builders);
         }
 
@@ -202,6 +204,7 @@ public class TagsGenerator {
             copy(Tags.Blocks.BOOKSHELVES, Tags.Items.BOOKSHELVES);
             copy(BlockTags.LOGS, ItemTags.LOGS);
             copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
+            copy(Tags.Blocks.PLAYER_WORKSTATIONS_CRAFTING_TABLES, Tags.Items.PLAYER_WORKSTATIONS_CRAFTING_TABLES);
             copy(BlockTags.SAND, ItemTags.SAND);
             copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
             copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
@@ -219,6 +222,7 @@ public class TagsGenerator {
             copy(Tags.Blocks.SANDS, Tags.Items.SANDS);
             copy(BWGBlockTags.BLACK_ICE, BWGItemTags.BLACK_ICE);
             copy(BWGBlockTags.BOREALIS_ICE, BWGItemTags.BOREALIS_ICE);
+            copy(Tags.Blocks.BUDDING_BLOCKS, Tags.Items.BUDDING_BLOCKS);
 
             BWGBlocks.BLOCKS.stream().filter(entry -> entry.get() instanceof FlowerBlock).forEach(
                     entry -> {

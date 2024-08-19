@@ -220,9 +220,9 @@ public class ManOWar extends Animal implements GeoEntity, Bucketable {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
         builder.define(COLOR, 0);
         builder.define(FROM_BUCKET, false);
-        super.defineSynchedData(builder);
     }
 
     @Override
