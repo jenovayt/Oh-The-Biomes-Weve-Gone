@@ -27,6 +27,7 @@ public class BiomesWeveGoneNeoForge {
 		eventBus.addListener(this::onPostInitialize);
 		EVENT_BUS.addListener(this::onServerStarting);
 		eventBus.addListener((Consumer<EntityAttributeCreationEvent>) event -> BWGEntities.registerEntityAttributes(event::put));
+		VanillaCompatNeoForge.registerVanillaCompatEvents(EVENT_BUS);
 		LootModifiersRegister.register(eventBus);
 	}
 
@@ -37,7 +38,7 @@ public class BiomesWeveGoneNeoForge {
 	private void onInitialize(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			BiomesWeveGone.commonSetup();
-
+			VanillaCompatNeoForge.init();
 			BWGTerraBlenderRegion.registerTerrablenderRegions();
 			NeoForgePlatformHandler.registerPottedPlants();
 			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, BiomesWeveGone.MOD_ID, BWGOverworldSurfaceRules.makeRules());

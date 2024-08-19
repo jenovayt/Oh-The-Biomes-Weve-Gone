@@ -27,5 +27,33 @@ versionRange = "[1.21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
+[[dependencies.biomeswevegone]]
+modId = "terrablender"
+type = "required"
+versionRange = "[4.0.0.1,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.biomeswevegone]]
+modId = "corgilib"
+type = "required"
+versionRange = "[4.0.2.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.biomeswevegone]]
+modId = "ohthetreesyoullgrow"
+type = "required"
+versionRange = "[5.0.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.biomeswevegone]]
+modId = "geckolib"
+type = "required"
+versionRange = "[4.4,)"
+ordering = "AFTER"
+side = "BOTH"
+
 [[mixins]]
 config = "biomeswevegone-common.mixins.json"
