@@ -9,6 +9,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -157,14 +158,14 @@ public class BWGWood {
         return registerNonSetBlockItem(key + "_leaves", () -> new BWGFruitLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).mapColor(mapColor), bwgFruitBlockSupplier, chance));
     }
 
-    protected static PottedBlock createNonSetSapling(String key, Supplier<AbstractTreeGrower> grower, TagKey<Block> ground) {
+    protected static PottedBlock createNonSetSapling(String key, Supplier<TreeGrower> grower, TagKey<Block> ground) {
         PottedBlock sapling = createSapling(key, grower, ground);
         NONSET_WOOD.add(sapling.getBlockSupplier());
         NONSET_WOOD.add(sapling.getPottedBlockSupplier());
         return sapling;
     }
     
-    protected static PottedBlock createSapling(String key, Supplier<AbstractTreeGrower> grower, TagKey<Block> ground) {
+    protected static PottedBlock createSapling(String key, Supplier<TreeGrower> grower, TagKey<Block> ground) {
         Supplier<SaplingBlock> sapling = registerBlockItem(key + "_sapling", () -> new BWGSaplingBlock(ground, grower.get()));
         return new PottedBlock(sapling, register("potted_" + key + "_sapling", PlatformHandler.PLATFORM_HANDLER.createPottedBlock(sapling)));
     }
