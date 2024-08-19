@@ -82,11 +82,6 @@ public class ManOWar extends Animal implements GeoEntity, Bucketable {
     }
 
     @Override
-    public boolean canBreatheUnderwater() {
-        return true;
-    }
-
-    @Override
     public @NotNull MobType getMobType() {
         return MobType.WATER;
     }

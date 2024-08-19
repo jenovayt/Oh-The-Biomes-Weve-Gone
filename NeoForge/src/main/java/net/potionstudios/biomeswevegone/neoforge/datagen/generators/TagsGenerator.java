@@ -16,6 +16,7 @@ import net.potionstudios.biomeswevegone.tags.BWGBlockTags;
 import net.potionstudios.biomeswevegone.tags.BWGItemTags;
 import net.potionstudios.biomeswevegone.tags.BWGStructureTags;
 import net.potionstudios.biomeswevegone.world.damagesource.BWGDamageTypes;
+import net.potionstudios.biomeswevegone.world.entity.BWGEntities;
 import net.potionstudios.biomeswevegone.world.entity.ai.village.poi.BWGPoiTypes;
 import net.potionstudios.biomeswevegone.world.item.BWGItems;
 import net.potionstudios.biomeswevegone.world.level.block.BWGBlocks;
@@ -42,6 +43,7 @@ public class TagsGenerator {
         generator.addProvider(run, new ItemTagGenerator(output, lookupProvider, BlockTags, helper));
         generator.addProvider(run, new BiomeTagGenerator(output, lookupProvider, helper));
         generator.addProvider(run, new StructureTagGenerator(output, lookupProvider, helper));
+        generator.addProvider(run, new EntityTypeTagGenerator(output, lookupProvider, helper));
         generator.addProvider(run, new PoiTagGenerator(output, lookupProvider, helper));
         generator.addProvider(run, new DamageTypeTagGenerator(output, lookupProvider, helper));
     }
@@ -351,6 +353,20 @@ public class TagsGenerator {
                     .add(BWGStructures.PUMPKIN_PATCH_VILLAGE);
             tag(StructureTags.VILLAGE).addTag(BWGStructureTags.VILLAGE);
             sortTagsAlphabeticallyAndRemoveDuplicateTagEntries(this.builders);
+        }
+    }
+
+    private static class EntityTypeTagGenerator extends EntityTypeTagsProvider {
+
+        public EntityTypeTagGenerator(PackOutput arg, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {
+            super(arg, completableFuture, BiomesWeveGone.MOD_ID, existingFileHelper);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.@NotNull Provider provider) {
+            tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER).add(BWGEntities.MAN_O_WAR.get());
+            tag(EntityTypeTags.AQUATIC).add(BWGEntities.MAN_O_WAR.get());
+            tag(Tags.EntityTypes.BOATS).add(BWGEntities.BWG_BOAT.get(), BWGEntities.BWG_CHEST_BOAT.get());
         }
     }
 
