@@ -61,9 +61,7 @@ public class ModelGenerators {
         protected void registerModels() {
             basicItem(BWGItems.BWG_LOGO.get());
             BWGItems.SIMPLE_ITEMS.forEach(supplier -> {
-                if (supplier.get() instanceof RecordItem)
-                    withExistingParent(key(supplier.get()).getPath(), mcLoc("minecraft:item/template_music_disc")).texture("layer0", BiomesWeveGone.id(ModelProvider.ITEM_FOLDER + "/" + key(supplier.get()).getPath()));
-                else if (supplier.get() instanceof SpawnEggItem) spawnEggItem(supplier.get());
+                if (supplier.get() instanceof SpawnEggItem) spawnEggItem(supplier.get());
                 else basicItem(supplier.get());
             });
             BWGWoodSet.woodsets().forEach(set -> {
@@ -73,6 +71,7 @@ public class ModelGenerators {
                 if (set.boatItem() != null) simpleItem(set.boatItem().get(), set.name() + "/boat");
                 if (set.chestBoatItem() != null) simpleItem(set.chestBoatItem().get(), set.name() + "/chest_boat");
             });
+            withExistingParent(key(BWGItems.MUSIC_DISC_PIXIE_CLUB.get()).getPath(), mcLoc("minecraft:item/template_music_disc")).texture("layer0", BiomesWeveGone.id(ModelProvider.ITEM_FOLDER + "/" + key(BWGItems.MUSIC_DISC_PIXIE_CLUB.get()).getPath()));
             simpleItemBlockTexture(BWGItems.TINY_LILY_PADS.get());
             singleTexture(key(BWGItems.FLOWERING_TINY_LILY_PADS.get()).getPath(), mcLoc("item/generated"), "layer0", BiomesWeveGone.id(ModelProvider.BLOCK_FOLDER + "/tiny_lily_pads")).texture("layer1", BiomesWeveGone.id(ModelProvider.BLOCK_FOLDER + "/tiny_lily_pads_flower_overlay"));
             simpleItemBlockTexture(BWGItems.WATER_SILK.get());
