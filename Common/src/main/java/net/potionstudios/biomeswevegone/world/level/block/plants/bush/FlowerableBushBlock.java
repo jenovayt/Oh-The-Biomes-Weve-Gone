@@ -10,16 +10,23 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
 public class FlowerableBushBlock extends BushBlock implements BonemealableBlock {
 
-    private final Supplier<FloweringBushBlock> floweringBlock;
+    private final @Nullable Supplier<FloweringBushBlock> floweringBlock;
+    private static final MapCodec<FlowerableBushBlock> CODEC = simpleCodec(FlowerableBushBlock::new);
 
-    public FlowerableBushBlock(Properties properties, Supplier<FloweringBushBlock> floweringBlock) {
+
+    public FlowerableBushBlock(Properties properties, @Nullable Supplier<FloweringBushBlock> floweringBlock) {
         super(properties);
         this.floweringBlock = floweringBlock;
+    }
+
+    public FlowerableBushBlock(Properties properties) {
+        this(properties, null);
     }
 
     @Override
@@ -36,5 +43,10 @@ public class FlowerableBushBlock extends BushBlock implements BonemealableBlock 
     public void performBonemeal(@NotNull ServerLevel level, @NotNull RandomSource random, @NotNull BlockPos pos, @NotNull BlockState state) {
         if (floweringBlock.get().defaultBlockState().canSurvive(level, pos))
             level.setBlock(pos, floweringBlock.get().defaultBlockState(), 1);
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BushBlock> codec() {
+        return CODEC;
     }
 }
